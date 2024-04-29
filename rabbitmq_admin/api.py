@@ -673,3 +673,10 @@ class AdminAPI(Resource):
         A list of health check local alarms.
         """
         return self._api_get('/api/health/checks/local-alarms')
+
+    def get_health_check_port_listener(self, port):
+        """
+        Responds a 200 OK if there is an active listener on the given port,
+        otherwise responds with a 503 Service Unavailable.
+        """
+        return self._api_get(f'/api/health/checks/port-listener/{port}')

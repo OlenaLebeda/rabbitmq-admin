@@ -486,3 +486,30 @@ class AdminAPITests(TestCase):
             alarms,
             {'status': 'ok'}
         )
+
+    def test_get_health_check_port_listener_success(self):
+        for port in [15672, 15692, 25672, 5672]:
+            with self.subTest(port=port):
+                status = self.api.get_health_check_port_listener(port)
+                self.assertEqual(
+                    status,
+                    {'status': 'ok', 'port': port}
+                )
+
+    def test_get_health_check_port_listener_failure(self):
+        with self.assertRaises(requests.exceptions.HTTPError) as error:
+            self.api.get_health_check_port_listener(1111)
+
+        self.assertEqual(
+            error.exception.response.status_code,
+            503
+        )
+        self.assertEqual(
+            error.exception.response.json(),
+            {
+                'missing': 1111,
+                'ports': [15672, 15692, 25672, 5672],
+                'reason': 'No active listener',
+                'status': 'failed'
+            }
+        )
