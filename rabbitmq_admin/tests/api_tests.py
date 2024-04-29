@@ -472,3 +472,10 @@ class AdminAPITests(TestCase):
             len(self.api.list_queues_for_vhost('/')),
             0
         )
+
+    def test_list_health_check_alarms(self):
+        alarms = self.api.list_health_check_alarms()
+        self.assertEqual(
+            alarms,
+            {'status': 'ok'}
+        )

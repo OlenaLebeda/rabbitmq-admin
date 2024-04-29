@@ -661,3 +661,9 @@ class AdminAPI(Resource):
                 'if-empty': if_empty
             },
         )
+
+    def list_health_check_alarms(self):
+        """
+        A list of health check alarms.
+        """
+        return self._api_get('/api/health/checks/alarms')
