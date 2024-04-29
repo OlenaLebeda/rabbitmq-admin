@@ -479,3 +479,10 @@ class AdminAPITests(TestCase):
             alarms,
             {'status': 'ok'}
         )
+
+    def test_list_health_check_local_alarms(self):
+        alarms = self.api.list_health_check_local_alarms()
+        self.assertEqual(
+            alarms,
+            {'status': 'ok'}
+        )

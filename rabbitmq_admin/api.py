@@ -667,3 +667,9 @@ class AdminAPI(Resource):
         A list of health check alarms.
         """
         return self._api_get('/api/health/checks/alarms')
+
+    def list_health_check_local_alarms(self):
+        """
+        A list of health check local alarms.
+        """
+        return self._api_get('/api/health/checks/local-alarms')
